@@ -9,29 +9,24 @@
 *
 *****************************************************************************/
 /**
-* @file main.c
-* @brief main file for the memory test project.  
+* @file help.c
+* @brief help function for the memory test project.  
 *
-* This source file provides the main() function for the
-* memory test project.  
+* This source file provides support for displaying the list of
+* commands available for the memory test project.  
 *
 * @author Jon Warriner
-* @date February 14, 2019
+* @date February 16, 2019
 * @version 1.0
 *
 */
 
-#define WELCOME ("Welcome to the memory test suite.\nType help to get a list of commands\n")
-
 #include <stdio.h>
 #include "help.h"
 
-int main(void)
+void help(void)
 {
+    printf("This will be the help message.\n");
 
-    printf(WELCOME);
-	
-	help();
-
-    return 0 ;
+    return;
 }
