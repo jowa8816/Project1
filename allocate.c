@@ -9,24 +9,24 @@
 *
 *****************************************************************************/
 /**
-* @file help.c
-* @brief help function for the memory test project.  
+* @file allocate.c
+* @brief allocate function for the memory test project.  
 *
-* This source file provides support for displaying the list of
-* commands available for the memory test project.  
+* This source file provides support for allocating a block of
+* memory for the memory test project.  
 *
 * @author Jon Warriner
-* @date February 16, 2019
+* @date February 17, 2019
 * @version 1.0
-*
+
 */
 
 #include <stdio.h>
-#include "help.h"
+#include "allocate.h"
 
-void help(char *cmd)
+void allocate(char *cmd)
 {
-    printf("This will be the help message.\n");
+    printf("This will be the allocate function.\n");
 
     return;
 }

@@ -9,24 +9,24 @@
 *
 *****************************************************************************/
 /**
-* @file help.c
-* @brief help function for the memory test project.  
+* @file writemem.c
+* @brief writemem function for the memory test project.  
 *
-* This source file provides support for displaying the list of
-* commands available for the memory test project.  
+* This source file provides support for writing to a location within
+* of a block of memory for the memory test project.  
 *
 * @author Jon Warriner
-* @date February 16, 2019
+* @date February 17, 2019
 * @version 1.0
-*
+
 */
 
 #include <stdio.h>
-#include "help.h"
+#include "writemem.h"
 
-void help(char *cmd)
+void writemem(char *cmd)
 {
-    printf("This will be the help message.\n");
+    printf("This will be the writemem function.\n");
 
     return;
 }

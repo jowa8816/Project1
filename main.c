@@ -21,17 +21,53 @@
 *
 */
 
-#define WELCOME ("Welcome to the memory test suite.\nType help to get a list of commands\n")
+#define WELCOME ("Welcome to the memory test suite!\nType 'help' to get a list of commands.\n")
+#define PROMPT	(">>")
+
+#define BUF_SIZE	(50)
+
+char buffer[BUF_SIZE];
 
 #include <stdio.h>
 #include "help.h"
+#include "allocate.h"
+#include "freemem.h"
+#include "dispmem.h"
+#include "writemem.h"
+#include "invertmem.h"
+#include "writepat.h"
+#include "verifypat.h"
+
+struct commandStruct
+{
+    const char *cmdName;
+    void (*func)(char *cmd);
+    const char *helpStr;
+};
+
+const struct commandStruct commands[] = {
+    {"help", &help, "Display the help message"},
+    {"allocate", &allocate, "Allocate a block of memory"},
+    {"freemem", &freemem, "Free a block of memory"},
+    {"dispmem", &dispmem, "Display a block of memory"},
+    {"writemem", &writemem, "Write to a specified memory location"},
+    {"invertmem", &invertmem, "Invert a block of memory"},
+    {"writepat", &writepat, "Write a pseudo random pattern to a block of memory"},
+    {"verifypat", &verifypat, "Verify a pseudo random pattern within a block of memory"},
+    {"",0,""}
+};
 
 int main(void)
 {
-
+    
     printf(WELCOME);
+    printf(PROMPT);
+    fgets(buffer,BUF_SIZE,stdin);
+    printf("string is: %s\n", buffer);
+
+    printf("\n");
 	
-	help();
+	//help();
 
     return 0 ;
 }

@@ -9,29 +9,32 @@
 *
 *****************************************************************************/
 /**
-* @file help.h
-* @brief An abstraction for the help function
+* @file verifypat.h
+* @brief An abstraction for the verifypat function
 *
 * This header file provides an abstraction of the function to
-* display a list of available commands.
+* verify a pseudo random pattern previously written to an area
+* within an allocated block of memory.
 *
 * @author Jon Warriner
-* @date February 16 2019
+* @date February 17 2019
 * @version 1.0
 *
 */
-#ifndef __HELP_H__
-#define __HELP_H__
+#ifndef __VERIFYPAT_H__
+#define __VERIFYPAT_H__
 #include <stdio.h>
+
 /**
-* @brief Displays a list of commands
+* @brief Verify a pseudo random patterm within an allocated block of memory
 *
-* Given a pointer to a char command buffer, this will display the help
-* message.
+* Given a pointer to a char command buffer, this will verify
+* a pseudo random pattern previously written to an area within
+* a block of allocated memory.
 *
-* @param buf Pointer to a command buffer
+* @param cmd Pointer to a command buffer
 *
 * @return void.
 */
-void help(char *buf);
-#endif /* __HELP_H__ */
+void verifypat(char *cmd);
+#endif /* __VERIFYPAT_H__ */

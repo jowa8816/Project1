@@ -19,14 +19,35 @@
 # @date February 14, 2019
 # @version 1.0
 #
-memtests : main.o help.o
-	cc -o memtests main.o help.o
+memtests : main.o help.o allocate.o freemem.o dispmem.o writemem.o invertmem.o writepat.o verifypat.o
+	cc -o memtests main.o help.o allocate.o freemem.o dispmem.o writemem.o invertmem.o writepat.o verifypat.o
 
-main.o : main.c help.h
+main.o : main.c help.h allocate.h freemem.h dispmem.h writemem.h invertmem.h writepat.h verifypat.h
 	cc -Wall -Werror -c main.c
 
 help.o : help.c help.h
 	cc -Wall -Werror -c help.c
 
+allocate.o : allocate.c allocate.h
+	cc -Wall -Werror -c allocate.c
+
+freemem.o : freemem.c freemem.h
+	cc -Wall -Werror -c freemem.c
+
+dispmem.o : dispmem.c dispmem.h
+	cc -Wall -Werror -c dispmem.c
+
+writemem.o : writemem.c writemem.h
+	cc -Wall -Werror -c writemem.c
+
+invertmem.o : invertmem.c invertmem.h
+	cc -Wall -Werror -c invertmem.c
+
+writepat.o : writepat.c writepat.h
+	cc -Wall -Werror -c writepat.c
+
+verifypat.o : verifypat.c verifypat.h
+	cc -Wall -Werror -c verifypat.c
+
 clean :
-	rm memtests main.o help.o
+	rm memtests main.o help.o allocate.o freemem.o dispmem.o writemem.o invertmem.o writepat.o verifypat.o

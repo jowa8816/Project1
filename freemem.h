@@ -9,29 +9,30 @@
 *
 *****************************************************************************/
 /**
-* @file help.h
-* @brief An abstraction for the help function
+* @file freemem.h
+* @brief An abstraction for the freemem function
 *
 * This header file provides an abstraction of the function to
-* display a list of available commands.
+* free a block of memory.
 *
 * @author Jon Warriner
-* @date February 16 2019
+* @date February 17 2019
 * @version 1.0
 *
 */
-#ifndef __HELP_H__
-#define __HELP_H__
+#ifndef __FREEMEM_H__
+#define __FREEMEM_H__
 #include <stdio.h>
+
 /**
-* @brief Displays a list of commands
+* @brief Free a block of memory
 *
-* Given a pointer to a char command buffer, this will display the help
-* message.
+* Given a pointer to a char command buffer, this will free
+* a block of previously allocated memory.
 *
-* @param buf Pointer to a command buffer
+* @param cmd Pointer to a command buffer
 *
 * @return void.
 */
-void help(char *buf);
-#endif /* __HELP_H__ */
+void freemem(char *cmd);
+#endif /* __FREEMEM_H__ */

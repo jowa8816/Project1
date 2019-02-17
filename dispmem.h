@@ -9,29 +9,30 @@
 *
 *****************************************************************************/
 /**
-* @file help.h
-* @brief An abstraction for the help function
+* @file dispmem.h
+* @brief An abstraction for the dispmem function
 *
 * This header file provides an abstraction of the function to
-* display a list of available commands.
+* display the contents of a block of memory.
 *
 * @author Jon Warriner
-* @date February 16 2019
+* @date February 17 2019
 * @version 1.0
 *
 */
-#ifndef __HELP_H__
-#define __HELP_H__
+#ifndef __DISPMEM_H__
+#define __DISPMEM_H__
 #include <stdio.h>
+
 /**
-* @brief Displays a list of commands
+* @brief Display the contents of a block of memory
 *
-* Given a pointer to a char command buffer, this will display the help
-* message.
+* Given a pointer to a char command buffer, this will display
+* the contents of a block of previously allocated memory.
 *
-* @param buf Pointer to a command buffer
+* @param cmd Pointer to a command buffer
 *
 * @return void.
 */
-void help(char *buf);
-#endif /* __HELP_H__ */
+void dispmem(char *cmd);
+#endif /* __DISPMEM_H__ */
