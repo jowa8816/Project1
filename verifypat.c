@@ -21,11 +21,16 @@
 
 */
 
-#include <stdio.h>
 #include "verifypat.h"
 
 void verifypat(char *cmd)
 {
+    if(cmd == 0)
+    {
+        printf("Missing buffer data\n");
+        return;
+    }
+
     printf("This will be the verifypat function.\n");
 
     return;

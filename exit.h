@@ -9,35 +9,35 @@
 *
 *****************************************************************************/
 /**
-* @file dispmem.h
-* @brief An abstraction for the dispmem function
+* @file exit.h
+* @brief An abstraction for the exit function
 *
 * This header file provides an abstraction of the function to
-* display the contents of a block of memory.
+* exit the application.
 *
 * @author Jon Warriner
 * @date February 17 2019
 * @version 1.0
 *
 */
-#ifndef __DISPMEM_H__
-#define __DISPMEM_H__
+#ifndef __EXIT_H__
+#define __EXIT_H__
 
-#include "types.h"
 #include <stdio.h>
+#include "types.h"
 
 //define the help string
-#define HELP_DISP ("Display a block of memory")
+#define HELP_EXIT ("Exit this application")
 
 /**
-* @brief Display the contents of a block of memory
+* @brief Displays a list of commands
 *
-* Given a pointer to a char command buffer, this will display
-* the contents of a block of previously allocated memory.
+* Given a pointer to a char command buffer, this will display the help
+* message.
 *
-* @param cmd Pointer to a command buffer
+* @param buf Pointer to a command buffer
 *
 * @return void.
 */
-void dispmem(char *cmd);
-#endif /* __DISPMEM_H__ */
+void exitapp(char *cmd);
+#endif /* __EXIT_H__ */

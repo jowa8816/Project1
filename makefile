@@ -19,35 +19,38 @@
 # @date February 14, 2019
 # @version 1.0
 #
-memtests : main.o help.o allocate.o freemem.o dispmem.o writemem.o invertmem.o writepat.o verifypat.o
-	cc -o memtests main.o help.o allocate.o freemem.o dispmem.o writemem.o invertmem.o writepat.o verifypat.o
+memtests : main.o help.o allocate.o freemem.o dispmem.o writemem.o invertmem.o writepat.o verifypat.o exit.o
+	cc -o memtests main.o help.o allocate.o freemem.o dispmem.o writemem.o invertmem.o writepat.o verifypat.o exit.o
 
-main.o : main.c help.h allocate.h freemem.h dispmem.h writemem.h invertmem.h writepat.h verifypat.h
+main.o : main.c help.h allocate.h freemem.h dispmem.h writemem.h invertmem.h writepat.h verifypat.h types.h exit.h
 	cc -Wall -Werror -c main.c
 
-help.o : help.c help.h
+help.o : help.c help.h types.h
 	cc -Wall -Werror -c help.c
 
-allocate.o : allocate.c allocate.h
+allocate.o : allocate.c allocate.h types.h
 	cc -Wall -Werror -c allocate.c
 
-freemem.o : freemem.c freemem.h
+freemem.o : freemem.c freemem.h types.h
 	cc -Wall -Werror -c freemem.c
 
-dispmem.o : dispmem.c dispmem.h
+dispmem.o : dispmem.c dispmem.h types.h
 	cc -Wall -Werror -c dispmem.c
 
-writemem.o : writemem.c writemem.h
+writemem.o : writemem.c writemem.h types.h
 	cc -Wall -Werror -c writemem.c
 
-invertmem.o : invertmem.c invertmem.h
+invertmem.o : invertmem.c invertmem.h types.h
 	cc -Wall -Werror -c invertmem.c
 
-writepat.o : writepat.c writepat.h
+writepat.o : writepat.c writepat.h types.h
 	cc -Wall -Werror -c writepat.c
 
-verifypat.o : verifypat.c verifypat.h
+verifypat.o : verifypat.c verifypat.h types.h
 	cc -Wall -Werror -c verifypat.c
 
+exit.o : exit.c exit.h types.h
+	cc -Wall -Werror -c exit.c
+
 clean :
-	rm memtests main.o help.o allocate.o freemem.o dispmem.o writemem.o invertmem.o writepat.o verifypat.o
+	rm memtests main.o help.o allocate.o freemem.o dispmem.o writemem.o invertmem.o writepat.o verifypat.o exit.o

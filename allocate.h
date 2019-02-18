@@ -22,7 +22,13 @@
 */
 #ifndef __ALLOCATE_H__
 #define __ALLOCATE_H__
+
+#include "types.h"
 #include <stdio.h>
+
+//define the help string
+#define HELP_ALLOC ("Allocate a block of memory")
+
 /**
 * @brief Allocate a block of memory
 *

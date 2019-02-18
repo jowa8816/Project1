@@ -23,7 +23,12 @@
 */
 #ifndef __VERIFYPAT_H__
 #define __VERIFYPAT_H__
+
 #include <stdio.h>
+#include "types.h"
+
+//define the help string
+#define HELP_VPAT ("Verify a pseudo random pattern within a block of memory")
 
 /**
 * @brief Verify a pseudo random patterm within an allocated block of memory

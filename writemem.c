@@ -21,11 +21,16 @@
 
 */
 
-#include <stdio.h>
 #include "writemem.h"
 
 void writemem(char *cmd)
 {
+    if(cmd == 0)
+    {
+        printf("Missing buffer data\n");
+        return;
+    }
+
     printf("This will be the writemem function.\n");
 
     return;

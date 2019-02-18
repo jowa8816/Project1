@@ -22,7 +22,12 @@
 */
 #ifndef __WRITEMEM_H__
 #define __WRITEMEM_H__
+
 #include <stdio.h>
+#include "types.h"
+
+//define the help string
+#define HELP_WRITE ("Write to a specified memory location")
 
 /**
 * @brief Write to a location within an allocated block of memory

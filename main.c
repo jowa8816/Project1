@@ -24,11 +24,15 @@
 #define WELCOME ("Welcome to the memory test suite!\nType 'help' to get a list of commands.\n")
 #define PROMPT	(">>")
 
-#define BUF_SIZE	(50)
+#define BUF_SIZE	(50)  //maximum size of buffer to recieve from stdin
+#define CMD_SIZE	(12)  //maximum size of an individual command
 
 char buffer[BUF_SIZE];
+char command[CMD_SIZE];
 
 #include <stdio.h>
+#include <string.h>
+#include "types.h"
 #include "help.h"
 #include "allocate.h"
 #include "freemem.h"
@@ -37,37 +41,114 @@ char buffer[BUF_SIZE];
 #include "invertmem.h"
 #include "writepat.h"
 #include "verifypat.h"
-
-struct commandStruct
-{
-    const char *cmdName;
-    void (*func)(char *cmd);
-    const char *helpStr;
-};
+#include "exit.h"
 
 const struct commandStruct commands[] = {
-    {"help", &help, "Display the help message"},
-    {"allocate", &allocate, "Allocate a block of memory"},
-    {"freemem", &freemem, "Free a block of memory"},
-    {"dispmem", &dispmem, "Display a block of memory"},
-    {"writemem", &writemem, "Write to a specified memory location"},
-    {"invertmem", &invertmem, "Invert a block of memory"},
-    {"writepat", &writepat, "Write a pseudo random pattern to a block of memory"},
-    {"verifypat", &verifypat, "Verify a pseudo random pattern within a block of memory"},
+    {"help", &help, HELP_HELP},
+    {"exit", &exitapp, HELP_EXIT},
+    {"allocate", &allocate, HELP_ALLOC},
+    {"freemem", &freemem, HELP_FREE},
+    {"dispmem", &dispmem, HELP_DISP},
+    {"writemem", &writemem, HELP_WRITE},
+    {"invertmem", &invertmem, HELP_INV},
+    {"writepat", &writepat, HELP_WPAT},
+    {"verifypat", &verifypat, HELP_VPAT},
     {"",0,""}
 };
 
+/*
+* Extract just the command name from the user input
+*/
+void getcmd(char *buf,char *cmd)
+{
+int16_t i;
+
+    if((buf == 0) || (cmd == 0))
+    {
+        return;
+    }
+
+    //clear out any previous command
+    for(i = 0; i < CMD_SIZE; i++)
+        {
+        cmd[i] = '\0';
+        }
+    
+    //copy up to the first space line feed or null from the buffer
+    //this get us just the command portion
+    i = 0;
+    while((*buf != ' ') && (*buf != '\n') && (*buf != '\0'))
+    {
+        *cmd = *buf;
+        cmd++;
+        buf++;
+        i++;
+    }
+}
+
+/*
+* Find the index in the function table
+*/
+int getcmdidx(char *cmd, const struct commandStruct *commands)
+{
+int16_t i = 0;
+
+    if((cmd == 0) || (commands == 0))
+    {
+        return(-1);
+    }
+
+    while((commands[i].func != 0) && (strcmp(cmd,commands[i].cmdName) != 0))
+    {
+        i++;
+    }
+
+
+    return(i);
+}
+
 int main(void)
 {
-    
+int16_t cmdidx; 
+   
+    //print the welcome message then enter a forever loop.
+    //we'll only leave the loop if the user exits the application.  
     printf(WELCOME);
-    printf(PROMPT);
-    fgets(buffer,BUF_SIZE,stdin);
-    printf("string is: %s\n", buffer);
 
-    printf("\n");
-	
-	//help();
+    while(1)
+    {
+        //print the command prompt and wait for user input
+        printf(PROMPT);
+        fgets(buffer,BUF_SIZE,stdin);
 
+        // get the command name that the user typed so we can compare it against valid
+        //command names.  
+        getcmd(buffer,command);
+        
+        //get the index of the command that the user typed
+        cmdidx = getcmdidx(command, &commands[0]);
+
+        //if the user calls the exit command we also want to return from the application
+        if(strcmp(command,"exit") == 0)
+        {
+            exitapp(buffer);
+            return(0);
+        }
+
+        //the help command is a little special.  we need to pass the command table
+        //instead of the buffer.
+        if(strcmp(command,"help") == 0)
+        {
+            help((char *)&commands[0]);
+        }
+        else if((cmdidx != -1) && (commands[cmdidx].func != 0))  //if the user typed a valid command name then run the associated function
+        {
+        (*commands[cmdidx].func)(buffer);
+        }
+        else
+        {
+            printf("%s is not a recongized command.\n", buffer);
+        }
+    }
     return 0 ;
 }

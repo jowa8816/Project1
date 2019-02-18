@@ -22,7 +22,12 @@
 */
 #ifndef __FREEMEM_H__
 #define __FREEMEM_H__
+
 #include <stdio.h>
+#include "types.h"
+
+//define the help string
+#define HELP_FREE ("Free a block of memory")
 
 /**
 * @brief Free a block of memory

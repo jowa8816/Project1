@@ -21,11 +21,16 @@
 
 */
 
-#include <stdio.h>
 #include "dispmem.h"
 
 void dispmem(char *cmd)
 {
+    if(cmd == 0)
+    {
+        printf("Missing buffer data\n");
+        return;
+    }
+
     printf("This will be the dispmem function.\n");
 
     return;

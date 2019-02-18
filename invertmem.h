@@ -22,7 +22,12 @@
 */
 #ifndef __INVERTMEM_H__
 #define __INVERTMEM_H__
+
 #include <stdio.h>
+#include "types.h"
+
+//define the help string
+#define HELP_INV ("Invert a block of memory")
 
 /**
 * @brief Invert the contents of a block of memory

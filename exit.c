@@ -9,21 +9,20 @@
 *
 *****************************************************************************/
 /**
-* @file freemem.c
-* @brief freemem function for the memory test project.  
+* @file exit.c
+* @brief exit function for the memory test project.  
 *
-* This source file provides support for freeing a block of
-* memory for the memory test project.  
+* This source file provides support for exiting the memory test project.  
 *
 * @author Jon Warriner
 * @date February 17, 2019
 * @version 1.0
-
+*
 */
 
-#include "freemem.h"
+#include "exit.h"
 
-void freemem(char *cmd)
+void exitapp(char *cmd)
 {
     if(cmd == 0)
     {
@@ -31,7 +30,7 @@ void freemem(char *cmd)
         return;
     }
 
-    printf("This will be the freemem function.\n");
+    printf("Bye bye!\n");
 
     return;
 }

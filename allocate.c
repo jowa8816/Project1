@@ -21,11 +21,16 @@
 
 */
 
-#include <stdio.h>
 #include "allocate.h"
 
 void allocate(char *cmd)
 {
+    if(cmd == 0)
+    {
+        printf("Missing buffer data\n");
+        return;
+    }
+
     printf("This will be the allocate function.\n");
 
     return;

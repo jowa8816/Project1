@@ -21,12 +21,24 @@
 *
 */
 
-#include <stdio.h>
 #include "help.h"
 
 void help(char *cmd)
 {
-    printf("This will be the help message.\n");
+struct commandStruct *tbl = (struct commandStruct *)cmd;
+int16_t i = 0;
+
+    if(cmd == 0)
+    {
+        printf("Can't display help\n");
+        return;
+    }
+
+    while(tbl[i].func != 0)
+    {
+        printf("%s - %s\n",tbl[i].cmdName, tbl[i].helpStr);
+        tbl++;
+    }
 
     return;
 }

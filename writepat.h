@@ -23,7 +23,12 @@
 */
 #ifndef __WRITEPAT_H__
 #define __WRITEPAT_H__
+
 #include <stdio.h>
+#include "types.h"
+
+//define the help string
+#define HELP_WPAT ("Write a pseudo random pattern to a block of memory")
 
 /**
 * @brief Write a pseudo random patterm to an area within an allocated block of memory

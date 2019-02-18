@@ -21,11 +21,16 @@
 
 */
 
-#include <stdio.h>
 #include "writepat.h"
 
 void writepat(char *cmd)
 {
+    if(cmd == 0)
+    {
+        printf("Missing buffer data\n");
+        return;
+    }
+
     printf("This will be the writepat function.\n");
 
     return;

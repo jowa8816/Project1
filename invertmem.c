@@ -21,11 +21,16 @@
 
 */
 
-#include <stdio.h>
 #include "invertmem.h"
 
 void invertmem(char *cmd)
 {
+    if(cmd == 0)
+    {
+        printf("Missing buffer data\n");
+        return;
+    }
+
     printf("This will be the invertmem function.\n");
 
     return;

@@ -9,35 +9,34 @@
 *
 *****************************************************************************/
 /**
-* @file help.h
-* @brief An abstraction for the help function
-*
-* This header file provides an abstraction of the function to
-* display a list of available commands.
+* @file types.h
+* @brief Define some custom datatypes and structures
 *
 * @author Jon Warriner
 * @date February 17 2019
 * @version 1.0
 *
 */
-#ifndef __HELP_H__
-#define __HELP_H__
+#ifndef __TYPES_H__
+#define __TYPES_H__
 
-#include <stdio.h>
-#include "types.h"
+//define some standard datatypes
+typedef char int8_t;
+typedef unsigned char uint8_t;
+typedef short int16_t;
+typedef unsigned short uint16_t;
+typedef long int32_t;
+typedef unsigned long uint32_t;
+typedef long long int64_t;
+typedef unsigned long long uint64_t;
 
-//define the help string
-#define HELP_HELP ("Display the help message")
+//define a structure for the command table
+struct commandStruct
+{
+    const char *cmdName;
+    void (*func)(char *cmd);
+    const char *helpStr;
+};
 
-/**
-* @brief Displays a list of commands
-*
-* Given a pointer to a char command buffer, this will display the help
-* message.
-*
-* @param buf Pointer to a command buffer
-*
-* @return void.
-*/
-void help(char *cmd);
-#endif /* __HELP_H__ */
+
+#endif /* __TYPES_H__ */
