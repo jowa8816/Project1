@@ -34,7 +34,7 @@ char command[CMD_SIZE];
 #include <string.h>
 #include "types.h"
 #include "help.h"
-#include "allocate.h"
+#include "allocmem.h"
 #include "freemem.h"
 #include "dispmem.h"
 #include "writemem.h"
@@ -46,7 +46,7 @@ char command[CMD_SIZE];
 const struct commandStruct commands[] = {
     {"help", &help, HELP_HELP},
     {"exit", &exitapp, HELP_EXIT},
-    {"allocate", &allocate, HELP_ALLOC},
+    {"allocmem", &allocmem, HELP_ALLOC},
     {"freemem", &freemem, HELP_FREE},
     {"dispmem", &dispmem, HELP_DISP},
     {"writemem", &writemem, HELP_WRITE},

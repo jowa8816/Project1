@@ -9,7 +9,7 @@
 *
 *****************************************************************************/
 /**
-* @file allocate.c
+* @file allocmem.c
 * @brief allocate function for the memory test project.  
 *
 * This source file provides support for allocating a block of
@@ -21,9 +21,9 @@
 
 */
 
-#include "allocate.h"
+#include "allocmem.h"
 
-void allocate(char *cmd)
+void allocmem(char *cmd)
 {
     if(cmd == 0)
     {

@@ -19,17 +19,17 @@
 # @date February 14, 2019
 # @version 1.0
 #
-memtests : main.o help.o allocate.o freemem.o dispmem.o writemem.o invertmem.o writepat.o verifypat.o exit.o
-	cc -o memtests main.o help.o allocate.o freemem.o dispmem.o writemem.o invertmem.o writepat.o verifypat.o exit.o
+memtests : main.o help.o allocmem.o freemem.o dispmem.o writemem.o invertmem.o writepat.o verifypat.o exit.o
+	cc -o memtests main.o help.o allocmem.o freemem.o dispmem.o writemem.o invertmem.o writepat.o verifypat.o exit.o
 
-main.o : main.c help.h allocate.h freemem.h dispmem.h writemem.h invertmem.h writepat.h verifypat.h types.h exit.h
+main.o : main.c help.h allocmem.h freemem.h dispmem.h writemem.h invertmem.h writepat.h verifypat.h types.h exit.h
 	cc -Wall -Werror -c main.c
 
 help.o : help.c help.h types.h
 	cc -Wall -Werror -c help.c
 
-allocate.o : allocate.c allocate.h types.h
-	cc -Wall -Werror -c allocate.c
+allocmem.o : allocmem.c allocmem.h types.h
+	cc -Wall -Werror -c allocmem.c
 
 freemem.o : freemem.c freemem.h types.h
 	cc -Wall -Werror -c freemem.c
@@ -53,4 +53,4 @@ exit.o : exit.c exit.h types.h
 	cc -Wall -Werror -c exit.c
 
 clean :
-	rm memtests main.o help.o allocate.o freemem.o dispmem.o writemem.o invertmem.o writepat.o verifypat.o exit.o
+	rm memtests main.o help.o allocmem.o freemem.o dispmem.o writemem.o invertmem.o writepat.o verifypat.o exit.o

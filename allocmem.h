@@ -9,7 +9,7 @@
 *
 *****************************************************************************/
 /**
-* @file allocate.h
+* @file allocmem.h
 * @brief An abstraction for the allocate function
 *
 * This header file provides an abstraction of the function to
@@ -20,8 +20,8 @@
 * @version 1.0
 *
 */
-#ifndef __ALLOCATE_H__
-#define __ALLOCATE_H__
+#ifndef __ALLOCMEM_H__
+#define __ALLOCMEM_H__
 
 #include "types.h"
 #include <stdio.h>
@@ -39,5 +39,5 @@
 *
 * @return void.
 */
-void allocate(char *cmd);
-#endif /* __ALLOCATE_H__ */
+void allocmem(char *cmd);
+#endif /* __ALLOCMEM_H__ */
