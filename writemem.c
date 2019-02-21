@@ -23,7 +23,7 @@
 
 #include "writemem.h"
 
-void writemem(char *cmd)
+void writemem(char *cmd, struct blockStruct *b)
 {
     if(cmd == 0)
     {
@@ -35,3 +35,4 @@ void writemem(char *cmd)
 
     return;
 }
+

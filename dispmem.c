@@ -23,7 +23,7 @@
 
 #include "dispmem.h"
 
-void dispmem(char *cmd)
+void dispmem(char *cmd, struct blockStruct *b)
 {
     if(cmd == 0)
     {
@@ -35,3 +35,4 @@ void dispmem(char *cmd)
 
     return;
 }
+

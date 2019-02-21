@@ -23,7 +23,7 @@
 
 #include "writepat.h"
 
-void writepat(char *cmd)
+void writepat(char *cmd, struct blockStruct *b)
 {
     if(cmd == 0)
     {
@@ -35,3 +35,4 @@ void writepat(char *cmd)
 
     return;
 }
+

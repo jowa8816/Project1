@@ -27,7 +27,7 @@
 #include "types.h"
 
 //define the help string
-#define HELP_FREE ("Free a block of memory")
+#define HELP_FREE ("freemem - Free an allocated block of memory.")
 
 /**
 * @brief Free a block of memory
@@ -36,8 +36,10 @@
 * a block of previously allocated memory.
 *
 * @param cmd Pointer to a command buffer
+* @param b   Pointer to a memory block structure
 *
 * @return void.
 */
-void freemem(char *cmd);
+void freemem(char *cmd, struct blockStruct *b);
 #endif /* __FREEMEM_H__ */
+

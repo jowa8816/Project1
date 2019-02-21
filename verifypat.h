@@ -41,5 +41,6 @@
 *
 * @return void.
 */
-void verifypat(char *cmd);
+void verifypat(char *cmd, struct blockStruct *b);
 #endif /* __VERIFYPAT_H__ */
+

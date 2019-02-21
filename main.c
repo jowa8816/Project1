@@ -109,7 +109,8 @@ int16_t i = 0;
 
 int main(void)
 {
-int16_t cmdidx; 
+int16_t cmdidx;
+struct blockStruct block = {0, 0};
    
     //print the welcome message then enter a forever loop.
     //we'll only leave the loop if the user exits the application.  
@@ -131,7 +132,7 @@ int16_t cmdidx;
         //if the user calls the exit command we also want to return from the application
         if(strcmp(command,"exit") == 0)
         {
-            exitapp(buffer);
+            exitapp(buffer,&block);
             return(0);
         }
 
@@ -139,11 +140,11 @@ int16_t cmdidx;
         //instead of the buffer.
         if(strcmp(command,"help") == 0)
         {
-            help((char *)&commands[0]);
+            help((char *)&commands[0],&block);
         }
         else if((cmdidx != -1) && (commands[cmdidx].func != 0))  //if the user typed a valid command name then run the associated function
         {
-        (*commands[cmdidx].func)(buffer);
+        (*commands[cmdidx].func)(buffer,&block);
         }
         else
         {

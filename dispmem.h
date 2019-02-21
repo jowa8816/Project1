@@ -39,5 +39,6 @@
 *
 * @return void.
 */
-void dispmem(char *cmd);
+void dispmem(char *cmd, struct blockStruct *b);
 #endif /* __DISPMEM_H__ */
+

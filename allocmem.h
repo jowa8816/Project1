@@ -27,7 +27,7 @@
 #include <stdio.h>
 
 //define the help string
-#define HELP_ALLOC ("Allocate a block of memory")
+#define HELP_ALLOC ("allocmem <words> - Allocate a block of memory containing <words> 4-byte words.")
 
 /**
 * @brief Allocate a block of memory
@@ -36,8 +36,10 @@
 * a block of memory.
 *
 * @param cmd Pointer to a command buffer
+* @param b   Pointer to a memory block structure
 *
 * @return void.
 */
-void allocmem(char *cmd);
+void allocmem(char *cmd, struct blockStruct *b);
 #endif /* __ALLOCMEM_H__ */
+

@@ -23,7 +23,7 @@
 
 #include "verifypat.h"
 
-void verifypat(char *cmd)
+void verifypat(char *cmd, struct blockStruct *b)
 {
     if(cmd == 0)
     {
@@ -35,3 +35,4 @@ void verifypat(char *cmd)
 
     return;
 }
+

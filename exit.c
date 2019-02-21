@@ -22,15 +22,21 @@
 
 #include "exit.h"
 
-void exitapp(char *cmd)
+void exitapp(char *cmd, struct blockStruct *b)
 {
     if(cmd == 0)
     {
         printf("Missing buffer data\n");
         return;
     }
-
+    
+    if(b->ptr)
+    {
+        printf("Freeing %d words of leftover allocated memory!\n",b->size);
+        free(b->ptr);
+    }
     printf("Bye bye!\n");
 
     return;
 }
+

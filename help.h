@@ -39,5 +39,6 @@
 *
 * @return void.
 */
-void help(char *cmd);
+void help(char *cmd, struct blockStruct *b);
 #endif /* __HELP_H__ */
+

@@ -39,5 +39,6 @@
 *
 * @return void.
 */
-void exitapp(char *cmd);
+void exitapp(char *cmd, struct blockStruct *b);
 #endif /* __EXIT_H__ */
+

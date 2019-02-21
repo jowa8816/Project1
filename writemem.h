@@ -39,5 +39,6 @@
 *
 * @return void.
 */
-void writemem(char *cmd);
+void writemem(char *cmd, struct blockStruct *b);
 #endif /* __WRITEMEM_H__ */
+

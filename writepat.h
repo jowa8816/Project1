@@ -41,5 +41,6 @@
 *
 * @return void.
 */
-void writepat(char *cmd);
+void writepat(char *cmd, struct blockStruct *b);
 #endif /* __WRITEPAT_H__ */
+

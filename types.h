@@ -21,22 +21,32 @@
 #define __TYPES_H__
 
 //define some standard datatypes
-typedef char int8_t;
+/*typedef char int8_t;
 typedef unsigned char uint8_t;
 typedef short int16_t;
 typedef unsigned short uint16_t;
 typedef long int32_t;
 typedef unsigned long uint32_t;
 typedef long long int64_t;
-typedef unsigned long long uint64_t;
+typedef unsigned long long uint64_t;*/
+
+#include <stdlib.h>
+#include <stdint.h>
+
+//define a structure for a block of allocated memory
+struct blockStruct
+{
+    void *ptr;
+    uint32_t size;
+};
 
 //define a structure for the command table
 struct commandStruct
 {
     const char *cmdName;
-    void (*func)(char *cmd);
+    void (*func)(char *cmd, struct blockStruct *b);
     const char *helpStr;
 };
 
-
 #endif /* __TYPES_H__ */
+

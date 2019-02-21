@@ -23,15 +23,29 @@
 
 #include "freemem.h"
 
-void freemem(char *cmd)
+void freemem(char *cmd, struct blockStruct *b)
 {
-    if(cmd == 0)
+    if((cmd == 0) || (b == 0))
     {
-        printf("Missing buffer data\n");
+        printf("Internal Error: Missing buffer data or block pointer!\n");
         return;
     }
 
-    printf("This will be the freemem function.\n");
+    //If we have an allocated block of memory, free it
+    //make sure to wipe out the structure that keeps track
+    //of the block info
+    if((b->ptr != 0) && (b->size != 0))
+    {
+        printf("Freeing %d words of allocated memory!\n",b->size);
+        free(b->ptr);
+        b->size = 0;
+        b->ptr = 0;
+    }
+    else
+    {
+        printf("No allocated blocks of memory to free!\n");
+    }
 
     return;
 }
+

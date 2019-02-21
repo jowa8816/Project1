@@ -39,5 +39,6 @@
 *
 * @return void.
 */
-void invertmem(char *cmd);
+void invertmem(char *cmd, struct blockStruct *b);
 #endif /* __INVERTMEM_H__ */
+

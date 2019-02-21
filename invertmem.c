@@ -23,7 +23,7 @@
 
 #include "invertmem.h"
 
-void invertmem(char *cmd)
+void invertmem(char *cmd, struct blockStruct *b)
 {
     if(cmd == 0)
     {
@@ -35,3 +35,4 @@ void invertmem(char *cmd)
 
     return;
 }
+
