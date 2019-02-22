@@ -25,13 +25,43 @@
 
 void writemem(char *cmd, struct blockStruct *b)
 {
-    if(cmd == 0)
+int32_t data;
+int32_t *address;
+char *endptr = 0;
+
+    if((cmd == 0) || (b == 0))
     {
-        printf("Missing buffer data\n");
+        printf("Internal Error: Missing buffer data or block pointer!\n");
         return;
     }
 
-    printf("This will be the writemem function.\n");
+    //First, we need to make sure we have an allocated block of memory 
+    //to display from
+    if((b->ptr != 0) && (b->size != 0))
+    {
+        //Extract the address and data from the command buffer
+        //command name is 8 chars long so we should start after that
+        address = (int32_t *)strtoll(&cmd[8], &endptr, 16);
+        data = strtol(endptr, 0, 16);
+#ifdef DEBUG
+        printf("address is: %p\n", address);
+        printf("data is: 0x%08X\n", data);
+#endif
+        //make sure the memory we want to write is within the 
+        //bounds of our allocated block
+        if((address >= (int32_t *)b->ptr) && (address <= ((int32_t *)b->ptr + ((int32_t)b->size * sizeof(int32_t)))))
+        {
+            *address = data;
+        }
+        else
+        {
+            printf("Error: The requested address is outside of the allocated block!\n");
+        }
+    }
+    else
+    {
+        printf("Error: No allocated blocks of memory to write!\n");
+    }
 
     return;
 }

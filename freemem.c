@@ -43,7 +43,7 @@ void freemem(char *cmd, struct blockStruct *b)
     }
     else
     {
-        printf("No allocated blocks of memory to free!\n");
+        printf("Error: No allocated blocks of memory to free!\n");
     }
 
     return;

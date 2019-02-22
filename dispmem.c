@@ -25,13 +25,51 @@
 
 void dispmem(char *cmd, struct blockStruct *b)
 {
-    if(cmd == 0)
+int32_t size;
+int32_t i = 0;
+int32_t *address;
+char *endptr = 0;
+
+    if((cmd == 0) || (b == 0))
     {
-        printf("Missing buffer data\n");
+        printf("Internal Error: Missing buffer data or block pointer!\n");
         return;
     }
 
-    printf("This will be the dispmem function.\n");
+    //First, we need to make sure we have an allocated block of memory 
+    //to display from
+    if((b->ptr != 0) && (b->size != 0))
+    {
+        //Extract the address and size from the command buffer
+        //command name is 7 chars long so we should start after that
+        address = (int32_t *)strtoll(&cmd[7], &endptr, 16);
+        size = strtol(endptr, 0, 10);
+#ifdef DEBUG
+        printf("address is: %p\n", address);
+        printf("size is: %d\n", size);
+#endif
+        //make sure the memory we want to dispaly is within the 
+        //bounds of our allocated block
+        if((size >= 0) && (address >= (int32_t *)b->ptr) && ((address + size) <= ((int32_t *)b->ptr + (int32_t)b->size)))
+        {
+            printf("   Address           Data\n");
+            printf("--------------    ----------\n");
+            do
+            {
+                printf("%p    0x%08X\n", address, *address);
+                address++;
+                i++;
+            }while(i < size);
+        }
+        else
+        {
+            printf("Error: All or part of the requested memory area is outside of the allocated block!\n");
+        }
+    }
+    else
+    {
+        printf("Error: No allocated blocks of memory to display!\n");
+    }
 
     return;
 }

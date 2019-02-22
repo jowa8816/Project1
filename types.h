@@ -33,6 +33,9 @@ typedef unsigned long long uint64_t;*/
 #include <stdlib.h>
 #include <stdint.h>
 
+//uncomment this define to enable some debug messages
+#define DEBUG
+
 //define a structure for a block of allocated memory
 struct blockStruct
 {

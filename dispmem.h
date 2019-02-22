@@ -27,7 +27,7 @@
 #include <stdio.h>
 
 //define the help string
-#define HELP_DISP ("Display a block of memory")
+#define HELP_DISP ("dispmem <address> [<words>] - Display memory from <address> for one or [<words>] 4-byte words in hexadecimal format.")
 
 /**
 * @brief Display the contents of a block of memory
@@ -36,6 +36,7 @@
 * the contents of a block of previously allocated memory.
 *
 * @param cmd Pointer to a command buffer
+* @param b   Pointer to a memory block structure
 *
 * @return void.
 */
