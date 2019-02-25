@@ -28,7 +28,7 @@
 #include <stdio.h>
 
 //define the help string
-#define HELP_DISP ("dispmem <address> [<words>] - Display memory from <address> for one or [<words>] 4-byte words in hexadecimal format.\n")
+#define HELP_DISP ("dispmem [-o] <address> [<words>] - Display memory from <address> for one or [<words>] 4-byte words in hexadecimal format.  Optional '-o' argument treats <address> as an offset into the allocated block of memory.\n")
 
 /**
 * @brief Display the contents of a block of memory

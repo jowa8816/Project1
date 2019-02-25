@@ -28,7 +28,7 @@
 #include "types.h"
 
 //define the help string
-#define HELP_WRITE ("writemem <address> <data> - Write one 4-byte word <data> to <address>.  Both parameters are in hexadecimal format.\n")
+#define HELP_WRITE ("writemem [-o] <address> <data> - Write one 4-byte word <data> to <address>.  Both parameters are in hexadecimal format.  Optional '-o' argument treats <address> as an offset into the allocated block of memory.\n")
 
 /**
 * @brief Write to a location within an allocated block of memory
