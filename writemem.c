@@ -39,10 +39,20 @@ char *endptr = 0;
     //to display from
     if((b->ptr != 0) && (b->size != 0))
     {
-        //Extract the address and data from the command buffer
-        //command name is 8 chars long so we should start after that
-        address = (int32_t *)strtoll(&cmd[8], &endptr, 16);
-        data = strtol(endptr, 0, 16);
+        if(isdigit(cmd[9]))
+        {
+            //Extract the address and size from the command buffer
+            //command name is 9 chars long so we should start after that
+            address = (int32_t *)strtoll(&cmd[8], &endptr, 16);
+            data = strtol(endptr, 0, 16);
+        }
+        else if((cmd[9] == '-') && (cmd[10] == 'o'))
+        {
+            //Extract the offset and size from the command buffer
+            //command name plus '-o' is 11 chars long so we should start after that
+            address = b->ptr + (int32_t )strtoll(&cmd[11], &endptr, 16);
+            data = strtol(endptr, 0, 16);
+        }
 #ifdef DEBUG
         printf("address is: %p\n", address);
         printf("data is: 0x%08X\n", data);
@@ -52,6 +62,7 @@ char *endptr = 0;
         if((address >= (int32_t *)b->ptr) && (address <= ((int32_t *)b->ptr + ((int32_t)b->size * sizeof(int32_t)))))
         {
             *address = data;
+            printf("%X written to address %p\n", data, address);
         }
         else
         {

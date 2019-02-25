@@ -28,7 +28,7 @@
 #include "types.h"
 
 //define the help string
-#define HELP_VPAT ("Verify a pseudo random pattern within a block of memory")
+#define HELP_VPAT ("Verify a pseudo random pattern within a block of memory. (Not yet implemented)\n")
 
 /**
 * @brief Verify a pseudo random patterm within an allocated block of memory

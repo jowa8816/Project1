@@ -27,7 +27,7 @@
 #include <stdio.h>
 
 //define the help string
-#define HELP_ALLOC ("allocmem <words> - Allocate a block of memory containing <words> 4-byte words.")
+#define HELP_ALLOC ("allocmem <words> - Allocate a block of memory containing <words> 4-byte words.\n")
 
 /**
 * @brief Allocate a block of memory

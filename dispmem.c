@@ -40,10 +40,20 @@ char *endptr = 0;
     //to display from
     if((b->ptr != 0) && (b->size != 0))
     {
-        //Extract the address and size from the command buffer
-        //command name is 7 chars long so we should start after that
-        address = (int32_t *)strtoll(&cmd[7], &endptr, 16);
-        size = strtol(endptr, 0, 10);
+        if(isdigit(cmd[8]))
+        {
+            //Extract the address and size from the command buffer
+            //command name is 7 chars long so we should start after that
+            address = (int32_t *)strtoll(&cmd[7], &endptr, 16);
+            size = strtol(endptr, 0, 10);
+        }
+        else if((cmd[8] == '-') && (cmd[9] == 'o'))
+        {
+            //Extract the offset and size from the command buffer
+            //command name plus '-o' is 10 chars long so we should start after that
+            address = b->ptr + (int32_t )strtoll(&cmd[10], &endptr, 16);
+            size = strtol(endptr, 0, 10);
+        }
 #ifdef DEBUG
         printf("address is: %p\n", address);
         printf("size is: %d\n", size);

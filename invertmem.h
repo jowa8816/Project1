@@ -25,10 +25,11 @@
 
 #include <time.h>
 #include <stdio.h>
+#include <ctype.h>
 #include "types.h"
 
 //define the help string
-#define HELP_INV ("invertmem <address> [<words>] -Invert the contents of memory starting at <address> for one or [<words>] 4-byte words.")
+#define HELP_INV ("invertmem <address> [<words>] -Invert the contents of memory starting at <address> for one or [<words>] 4-byte words.\n")
 
 /**
 * @brief Invert the contents of a block of memory

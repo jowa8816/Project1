@@ -54,3 +54,6 @@ exit.o : exit.c exit.h types.h
 
 clean :
 	rm memtests main.o help.o allocmem.o freemem.o dispmem.o writemem.o invertmem.o writepat.o verifypat.o exit.o
+
+test : memtests testscript
+	./memtests < testscript

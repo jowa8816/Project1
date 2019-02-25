@@ -1,6 +1,10 @@
 help
-allocmem
+allocmem 5
+dispmem -o 0x0 5
+writemem -o 0x0 0x5A5A5A5A
+dispmem -o 0x0 5
+invertmem -o 0x0 5
+dispmem -o 0x0 5
 freemem
-bogus
 exit
 

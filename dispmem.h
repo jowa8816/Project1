@@ -24,10 +24,11 @@
 #define __DISPMEM_H__
 
 #include "types.h"
+#include <ctype.h>
 #include <stdio.h>
 
 //define the help string
-#define HELP_DISP ("dispmem <address> [<words>] - Display memory from <address> for one or [<words>] 4-byte words in hexadecimal format.")
+#define HELP_DISP ("dispmem <address> [<words>] - Display memory from <address> for one or [<words>] 4-byte words in hexadecimal format.\n")
 
 /**
 * @brief Display the contents of a block of memory

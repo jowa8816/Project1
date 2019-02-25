@@ -28,7 +28,7 @@
 #include "types.h"
 
 //define the help string
-#define HELP_WPAT ("Write a pseudo random pattern to a block of memory")
+#define HELP_WPAT ("Write a pseudo random pattern to a block of memory. (Not yet implemented)\n")
 
 /**
 * @brief Write a pseudo random patterm to an area within an allocated block of memory
