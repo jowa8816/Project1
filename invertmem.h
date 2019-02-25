@@ -23,11 +23,12 @@
 #ifndef __INVERTMEM_H__
 #define __INVERTMEM_H__
 
+#include <time.h>
 #include <stdio.h>
 #include "types.h"
 
 //define the help string
-#define HELP_INV ("Invert a block of memory")
+#define HELP_INV ("invertmem <address> [<words>] -Invert the contents of memory starting at <address> for one or [<words>] 4-byte words.")
 
 /**
 * @brief Invert the contents of a block of memory
@@ -36,6 +37,7 @@
 * the contents of a block of previously allocated memory.
 *
 * @param cmd Pointer to a command buffer
+* @param b   Pointer to a memory block structure
 *
 * @return void.
 */

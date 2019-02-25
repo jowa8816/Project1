@@ -25,13 +25,57 @@
 
 void invertmem(char *cmd, struct blockStruct *b)
 {
-    if(cmd == 0)
+int32_t size;
+int32_t i = 0;
+int32_t *address;
+char *endptr = 0;
+clock_t start_t, end_t;
+double elapsed_t;
+
+    if((cmd == 0) || (b == 0))
     {
-        printf("Missing buffer data\n");
+        printf("Internal Error: Missing buffer data or block pointer!\n");
         return;
     }
 
-    printf("This will be the invertmem function.\n");
+    //First, we need to make sure we have an allocated block of memory 
+    //to invert
+    if((b->ptr != 0) && (b->size != 0))
+    {
+        //Extract the address and size from the command buffer
+        //command name is 9 chars long so we should start after that
+        address = (int32_t *)strtoll(&cmd[9], &endptr, 16);
+        size = strtol(endptr, 0, 10);
+#ifdef DEBUG
+        printf("address is: %p\n", address);
+        printf("size is: %d\n", size);
+#endif
+        //make sure the memory we want to invert is within the 
+        //bounds of our allocated block
+        if((size >= 0) && (address >= (int32_t *)b->ptr) && ((address + size) <= ((int32_t *)b->ptr + (int32_t)b->size)))
+        {
+            start_t = clock();
+
+            printf("Inverting %d words of memory starting at adress %p.\n", size,address);
+            do
+            {
+                *address ^= 0xFFFFFFFF;
+                address++;
+                i++;
+            }while(i < size);
+            end_t = clock();
+            elapsed_t = (((double)(end_t - start_t) / CLOCKS_PER_SEC) * 1000.0);
+            printf("Total elapsed time = %fms\n", elapsed_t);
+        }
+        else
+        {
+            printf("Error: All or part of the requested memory area is outside of the allocated block!\n");
+        }
+    }
+    else
+    {
+        printf("Error: No allocated blocks of memory to invert!\n");
+    }
 
     return;
 }
