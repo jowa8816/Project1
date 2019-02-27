@@ -19,8 +19,8 @@
 # @date February 14, 2019
 # @version 1.0
 #
-memtests : main.o help.o allocmem.o freemem.o dispmem.o writemem.o invertmem.o writepat.o verifypat.o exit.o
-	cc -o memtests main.o help.o allocmem.o freemem.o dispmem.o writemem.o invertmem.o writepat.o verifypat.o exit.o
+memtests : main.o help.o allocmem.o freemem.o dispmem.o writemem.o invertmem.o writepat.o verifypat.o exit.o ps_rand.o
+	cc -o memtests main.o help.o allocmem.o freemem.o dispmem.o writemem.o invertmem.o writepat.o verifypat.o exit.o ps_rand.o
 
 main.o : main.c help.h allocmem.h freemem.h dispmem.h writemem.h invertmem.h writepat.h verifypat.h types.h exit.h
 	cc -Wall -Werror -c main.c
@@ -43,17 +43,20 @@ writemem.o : writemem.c writemem.h types.h
 invertmem.o : invertmem.c invertmem.h types.h
 	cc -Wall -Werror -c invertmem.c
 
-writepat.o : writepat.c writepat.h types.h
+writepat.o : writepat.c writepat.h types.h ps_rand.h
 	cc -Wall -Werror -c writepat.c
 
-verifypat.o : verifypat.c verifypat.h types.h
+verifypat.o : verifypat.c verifypat.h types.h ps_rand.h
 	cc -Wall -Werror -c verifypat.c
 
 exit.o : exit.c exit.h types.h
 	cc -Wall -Werror -c exit.c
 
+ps_rand.o : ps_rand.c ps_rand.h types.h
+	cc -Wall -Werror -c ps_rand.c
+
 clean :
-	rm memtests main.o help.o allocmem.o freemem.o dispmem.o writemem.o invertmem.o writepat.o verifypat.o exit.o
+	rm memtests main.o help.o allocmem.o freemem.o dispmem.o writemem.o invertmem.o writepat.o verifypat.o exit.o ps_rand.o
 
 test : memtests testscript
 	./memtests < testscript

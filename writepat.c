@@ -25,13 +25,32 @@
 
 void writepat(char *cmd, struct blockStruct *b)
 {
-    if(cmd == 0)
+struct randStruct rnd;
+uint32_t i = 0;
+uint32_t seed = 0;
+
+    if((cmd == 0) || (b == 0))
     {
-        printf("Missing buffer data\n");
+        printf("Internal Error: Missing buffer data or block pointer!\n");
         return;
     }
 
-    printf("This will be the writepat function.\n");
+    //Extract the seed from the command buffer
+    //command name is 8 chars long so we should start after that
+    seed = strtol(&cmd[8], 0, 10);
+#ifdef DEBUG
+    printf("seed is: %d\n", seed);
+#endif
+
+    rnd.m = 8;
+    rnd.c = 3;
+    rnd.a = 5;
+    rnd.X = seed;
+    for(i = 0; i < 20; i++)
+    {
+        ps_rand(&rnd);
+        printf("%d\n", rnd.X);
+    }
 
     return;
 }

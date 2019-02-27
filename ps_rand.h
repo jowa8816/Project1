@@ -9,39 +9,44 @@
 *
 *****************************************************************************/
 /**
-* @file writepat.h
-* @brief An abstraction for the writepat function
+* @file ps_rand.h
+* @brief An abstraction for the ps_rand function
 *
 * This header file provides an abstraction of the function to
-* write a pseudo random pattern to an area within an allocated
-* block of memory.
+* generate a pseudo random number sequence.
 *
 * @author Jon Warriner
-* @date February 17 2019
+* @date February 26 2019
 * @version 1.0
 *
 */
-#ifndef __WRITEPAT_H__
-#define __WRITEPAT_H__
+#ifndef __PS_RAND_H__
+#define __PS_RAND_H__
 
-#include <stdio.h>
 #include "types.h"
-#include "ps_rand.h"
+#include <stdio.h>
 
-//define the help string
-#define HELP_WPAT ("Write a pseudo random pattern to a block of memory. (Not yet implemented)\n")
+//define a structure for a block of allocated memory
+struct randStruct
+{
+    uint32_t a;
+    uint32_t c;
+    uint32_t m;
+    uint32_t X;
+};
+
 
 /**
-* @brief Write a pseudo random patterm to an area within an allocated block of memory
+* @brief Generate a sequence of pseudo random numbers
 *
-* Given a pointer to a char command buffer, this will write
-* a pseudo random pattern to an area within a block of
-* previously allocated memory.
+* Given a pointer to a char command buffer, this will display
+* the contents of a block of previously allocated memory.
 *
 * @param cmd Pointer to a command buffer
+* @param b   Pointer to a memory block structure
 *
 * @return void.
 */
-void writepat(char *cmd, struct blockStruct *b);
-#endif /* __WRITEPAT_H__ */
+void ps_rand(struct randStruct *r);
+#endif /* __PS_RAND_H__ */
 
