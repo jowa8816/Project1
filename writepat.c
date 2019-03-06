@@ -26,30 +26,81 @@
 void writepat(char *cmd, struct blockStruct *b)
 {
 struct randStruct rnd;
+int32_t size;
 uint32_t i = 0;
 uint32_t seed = 0;
+int32_t *address;
+char *endptr = 0;
+clock_t start_t, end_t;
+double elapsed_t;
 
     if((cmd == 0) || (b == 0))
     {
         printf("Internal Error: Missing buffer data or block pointer!\n");
         return;
     }
-
-    //Extract the seed from the command buffer
-    //command name is 8 chars long so we should start after that
-    seed = strtol(&cmd[8], 0, 10);
-#ifdef DEBUG
-    printf("seed is: %d\n", seed);
-#endif
-
-    rnd.m = 8;
-    rnd.c = 3;
-    rnd.a = 5;
-    rnd.X = seed;
-    for(i = 0; i < 20; i++)
+    //First, we need to make sure we have an allocated block of memory 
+    //to write to
+    if((b->ptr != 0) && (b->size != 0))
     {
-        ps_rand(&rnd);
-        printf("%d\n", rnd.X);
+        if(isdigit(cmd[9]))
+        {
+            //Extract the address, size and seed from the command buffer
+            //command name is 9 chars long so we should start after that
+            address = (int32_t *)strtoll(&cmd[8], &endptr, 16);
+            size = strtol(endptr, &endptr, 10);
+            seed = strtol(endptr, 0, 16);
+        }
+        else if((cmd[9] == '-') && (cmd[10] == 'o'))
+        {
+            //Extract the offset, size and seed from the command buffer
+            //command name plus '-o' is 11 chars long so we should start after that
+            address = b->ptr + (int32_t )strtoll(&cmd[11], &endptr, 16);
+            size = strtol(endptr, &endptr, 10);
+            seed = strtol(endptr, 0, 16);
+        }
+#ifdef DEBUG
+        printf("address is: %p\n", address);
+        printf("size is: 0x%08X\n", size);
+        printf("seed is: 0x%08X\n", seed);
+#endif
+        //make sure the memory we want to write is within the 
+        //bounds of our allocated block
+        if((size >= 0) && (address >= (int32_t *)b->ptr) && ((address + size) <= ((int32_t *)b->ptr + (int32_t)b->size)))
+        {
+            //setup the random number generator
+            rnd.m = 8;
+            rnd.c = 3;
+            rnd.a = 5;
+            rnd.X = seed;
+            printf("Writing %d pseudo random words of memory starting at adress %p.\n", size, address);
+#ifdef DEBUG
+            printf("   Address           Data\n");
+            printf("--------------    ----------\n");
+#endif
+            start_t = clock();
+            do
+            {
+                ps_rand(&rnd);
+                *address = rnd.X;
+#ifdef DEBUG
+                printf("%p    0x%08X\n", address, *address);
+#endif
+                address++;
+                i++;
+            }while(i < size);
+            end_t = clock();
+            elapsed_t = (((double)(end_t - start_t) / CLOCKS_PER_SEC) * 1000.0);
+            printf("Total elapsed time = %fms\n", elapsed_t);
+        }
+        else
+        {
+            printf("Error: All or part of the requested memory area is outside of the allocated block!\n");
+        }
+    }
+    else
+    {
+        printf("Error: No allocated blocks of memory to write!\n");
     }
 
     return;

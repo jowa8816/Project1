@@ -36,7 +36,7 @@ char *endptr = 0;
     }
 
     //First, we need to make sure we have an allocated block of memory 
-    //to display from
+    //to write to
     if((b->ptr != 0) && (b->size != 0))
     {
         if(isdigit(cmd[9]))

@@ -20,21 +20,11 @@
 #ifndef __TYPES_H__
 #define __TYPES_H__
 
-//define some standard datatypes
-/*typedef char int8_t;
-typedef unsigned char uint8_t;
-typedef short int16_t;
-typedef unsigned short uint16_t;
-typedef long int32_t;
-typedef unsigned long uint32_t;
-typedef long long int64_t;
-typedef unsigned long long uint64_t;*/
-
 #include <stdlib.h>
 #include <stdint.h>
 
 //uncomment this define to enable some debug messages
-#define DEBUG
+//#define DEBUG
 
 //define a structure for a block of allocated memory
 struct blockStruct

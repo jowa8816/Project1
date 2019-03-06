@@ -25,13 +25,92 @@
 
 void verifypat(char *cmd, struct blockStruct *b)
 {
-    if(cmd == 0)
+struct randStruct rnd;
+int32_t size;
+uint32_t i = 0;
+uint32_t seed = 0;
+int32_t *address;
+char *endptr = 0;
+clock_t start_t, end_t;
+double elapsed_t;
+uint32_t errors = 0;
+
+    if((cmd == 0) || (b == 0))
     {
-        printf("Missing buffer data\n");
+        printf("Internal Error: Missing buffer data or block pointer!\n");
         return;
     }
+    //First, we need to make sure we have an allocated block of memory 
+    //to write to
+    if((b->ptr != 0) && (b->size != 0))
+    {
+        if(isdigit(cmd[10]))
+        {
+            //Extract the address, size and seed from the command buffer
+            //command name is 9 chars long so we should start after that
+            address = (int32_t *)strtoll(&cmd[9], &endptr, 16);
+            size = strtol(endptr, &endptr, 10);
+            seed = strtol(endptr, 0, 16);
+        }
+        else if((cmd[10] == '-') && (cmd[11] == 'o'))
+        {
+            //Extract the offset, size and seed from the command buffer
+            //command name plus '-o' is 11 chars long so we should start after that
+            address = b->ptr + (int32_t )strtoll(&cmd[12], &endptr, 16);
+            size = strtol(endptr, &endptr, 10);
+            seed = strtol(endptr, 0, 16);
+        }
+#ifdef DEBUG
+        printf("address is: %p\n", address);
+        printf("size is: 0x%08X\n", size);
+        printf("seed is: 0x%08X\n", seed);
+#endif
+        //make sure the memory we want to write is within the 
+        //bounds of our allocated block
+        if((size >= 0) && (address >= (int32_t *)b->ptr) && ((address + size) <= ((int32_t *)b->ptr + (int32_t)b->size)))
+        {
+            //setup the random number generator
+            rnd.m = 8;
+            rnd.c = 3;
+            rnd.a = 5;
+            rnd.X = seed;
+            printf("Verifying %d pseudo random words of memory starting at adress %p.\n", size, address);
 
-    printf("This will be the verifypat function.\n");
+            start_t = clock();
+            do
+            {
+                ps_rand(&rnd);
+                if(*address != rnd.X)
+                {
+                    errors++;
+                    printf("Pattern mismatch at address: %p\n", address);
+                    printf("Expected data: 0x%08X\n", rnd.X);
+                    printf("Actual data: 0x%08X\n\n", *address);
+                }
+                address++;
+                i++;
+            }while(i < size);
+            end_t = clock();
+            elapsed_t = (((double)(end_t - start_t) / CLOCKS_PER_SEC) * 1000.0);
+            if(errors == 0)
+            {
+                printf("All words verified!\n");
+            }
+            else
+            {
+                printf("%d total errors detected!\n", errors);
+            }
+            printf("Total elapsed time = %fms\n", elapsed_t);
+        }
+        else
+        {
+            printf("Error: All or part of the requested memory area is outside of the allocated block!\n");
+        }
+    }
+    else
+    {
+        printf("Error: No allocated blocks of memory to verify!\n");
+    }
 
     return;
 }
