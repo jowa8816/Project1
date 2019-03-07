@@ -26,12 +26,31 @@
 #include "types.h"
 #include <stdio.h>
 
+// define the constants that we'll use in our rand function
+//'m' is the modulus.  This pseudo random number generator will
+//produce integers in the range of 0 to m-1.  For this implementation
+//'m' must be a power of 2.
+#define RAND_M	0x0000000100000000		//2^32
+//'a' is the multiplier.  The previous output will be multiplied by 'a.'  
+//The valid range for 'a' is 0<a<m
+#define RAND_A	1664525
+//'c' is the increment.  This is added to the previous output after it
+//is multiplied by 'a.'  The valid range for 'c' is 0<=c<m
+#define RAND_C	1013904223
+
+//Hull-Dobell Theorem
+//A full period of 'm' can be achieved for all seed values if and only if
+//
+//1) m and c are relatively prime. (The only common factor of the two is 1.)
+//2) a-1 is divisible by all prime factors off m.
+//3) a-1 is divisible by 4 if m is divisible by 4.  
+
 //define a structure for a block of allocated memory
 struct randStruct
 {
-    uint32_t a;
-    uint32_t c;
-    uint32_t m;
+    uint64_t a;
+    uint64_t c;
+    uint64_t m;
     uint32_t X;
 };
 

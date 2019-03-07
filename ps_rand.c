@@ -31,7 +31,10 @@ void ps_rand(struct randStruct *r)
         return;
     }
 
-    r->X = ((r->a * r->X) + r->c) & (r->m - 1);
+    //compute the next value in the sequence.
+    //m must be a power of 2 so that we can use
+    //& here instead of %
+    r->X = (uint32_t)(((r->a * r->X) + r->c) & (r->m - 1));
 
     return;
 }

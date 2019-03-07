@@ -70,9 +70,9 @@ uint32_t errors = 0;
         if((size >= 0) && (address >= (int32_t *)b->ptr) && ((address + size) <= ((int32_t *)b->ptr + (int32_t)b->size)))
         {
             //setup the random number generator
-            rnd.m = 8;
-            rnd.c = 3;
-            rnd.a = 5;
+            rnd.m = RAND_M;
+            rnd.c = RAND_C;
+            rnd.a = RAND_A;
             rnd.X = seed;
             printf("Verifying %d pseudo random words of memory starting at adress %p.\n", size, address);
 

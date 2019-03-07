@@ -6,5 +6,10 @@ dispmem -o 0x0 5
 invertmem -o 0x0 5
 dispmem -o 0x0 5
 freemem
+allocmem 1024
+writepat -o 0x0 1024 0xFFFFFFFF
+verifypat -o 0x0 1024 0xFFFFFFFF
+writemem -o 0x0 0x00000000
+verifypat -o 0x0 1024 0xFFFFFFFF
 exit
 
