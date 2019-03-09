@@ -26,16 +26,16 @@ void exitapp(char *cmd, struct blockStruct *b)
 {
     if(cmd == 0)
     {
-        printf("Missing buffer data\n");
+        printf("Missing buffer data\r\n");
         return;
     }
     
     if(b->ptr)
     {
-        printf("Freeing %d words of leftover allocated memory!\n",b->size);
+        printf("Freeing %d words of leftover allocated memory!\r\n",b->size);
         free(b->ptr);
     }
-    printf("Bye bye!\n");
+    printf("Bye bye!\r\n");
 
     return;
 }

@@ -34,7 +34,7 @@ double elapsed_t;
 
     if((cmd == 0) || (b == 0))
     {
-        printf("Internal Error: Missing buffer data or block pointer!\n");
+        printf("Internal Error: Missing buffer data or block pointer!\r\n");
         return;
     }
 
@@ -57,8 +57,8 @@ double elapsed_t;
             size = strtol(endptr, 0, 10);
         }
 #ifdef DEBUG
-        printf("address is: %p\n", address);
-        printf("size is: %d\n", size);
+        printf("address is: %p\r\n", address);
+        printf("size is: %d\r\n", size);
 #endif
         //make sure the memory we want to invert is within the 
         //bounds of our allocated block
@@ -66,7 +66,7 @@ double elapsed_t;
         {
             start_t = clock();
 
-            printf("Inverting %d words of memory starting at adress %p.\n", size,address);
+            printf("Inverting %d words of memory starting at adress %p.\r\n", size,address);
             do
             {
                 *address ^= 0xFFFFFFFF;
@@ -75,16 +75,16 @@ double elapsed_t;
             }while(i < size);
             end_t = clock();
             elapsed_t = (((double)(end_t - start_t) / CLOCKS_PER_SEC) * 1000.0);
-            printf("Total elapsed time = %fms\n", elapsed_t);
+            printf("Total elapsed time = %fms\r\n", elapsed_t);
         }
         else
         {
-            printf("Error: All or part of the requested memory area is outside of the allocated block!\n");
+            printf("Error: All or part of the requested memory area is outside of the allocated block!\r\n");
         }
     }
     else
     {
-        printf("Error: No allocated blocks of memory to invert!\n");
+        printf("Error: No allocated blocks of memory to invert!\r\n");
     }
 
     return;

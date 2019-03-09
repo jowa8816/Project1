@@ -27,7 +27,7 @@
 #include "types.h"
 
 //define the help string
-#define HELP_HELP ("help - Display the help message.\n")
+#define HELP_HELP ("help - Display the help message.\r\n")
 
 /**
 * @brief Displays a list of commands

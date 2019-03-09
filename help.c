@@ -30,13 +30,13 @@ int16_t i = 0;
 
     if(cmd == 0)
     {
-        printf("Can't display help\n");
+        printf("Can't display help\r\n");
         return;
     }
 
     while(tbl[i].func != 0)
     {
-        printf("%s\n", tbl[i].helpStr);
+        printf("%s\r\n", tbl[i].helpStr);
         tbl++;
     }
 

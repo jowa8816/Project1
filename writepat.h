@@ -31,7 +31,7 @@
 #include "ps_rand.h"
 
 //define the help string
-#define HELP_WPAT ("writepat [-o] <address> [<words>] [<seed>]- Write a pseudo random pattern starting at <address> for one or [<words>] 4-byte words.  [<seed>] specifies the starting point for the random number generator.  Optional '-o' argument treats <address> as an offset into the allocated block of memory.\n")
+#define HELP_WPAT ("writepat [-o] <address> [<words>] [<seed>]- Write a pseudo random pattern starting at <address> for one or [<words>] 4-byte words.  [<seed>] specifies the starting point for the random number generator.  Optional '-o' argument treats <address> as an offset into the allocated block of memory.\r\n")
 
 /**
 * @brief Write a pseudo random patterm to an area within an allocated block of memory

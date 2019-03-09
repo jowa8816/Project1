@@ -36,7 +36,7 @@ double elapsed_t;
 
     if((cmd == 0) || (b == 0))
     {
-        printf("Internal Error: Missing buffer data or block pointer!\n");
+        printf("Internal Error: Missing buffer data or block pointer!\r\n");
         return;
     }
     //First, we need to make sure we have an allocated block of memory 
@@ -60,9 +60,9 @@ double elapsed_t;
             seed = strtol(endptr, 0, 16);
         }
 #ifdef DEBUG
-        printf("address is: %p\n", address);
-        printf("size is: 0x%08X\n", size);
-        printf("seed is: 0x%08X\n", seed);
+        printf("address is: %p\r\n", address);
+        printf("size is: 0x%08X\r\n", size);
+        printf("seed is: 0x%08X\r\n", seed);
 #endif
         //make sure the memory we want to write is within the 
         //bounds of our allocated block
@@ -73,10 +73,10 @@ double elapsed_t;
             rnd.c = RAND_C;
             rnd.a = RAND_A;
             rnd.X = seed;
-            printf("Writing %d pseudo random words of memory starting at adress %p.\n", size, address);
+            printf("Writing %d pseudo random words of memory starting at adress %p.\r\n", size, address);
 #ifdef DEBUG
-            printf("   Address           Data\n");
-            printf("--------------    ----------\n");
+            printf("   Address           Data\r\n");
+            printf("--------------    ----------\r\n");
 #endif
             start_t = clock();
             do
@@ -84,23 +84,23 @@ double elapsed_t;
                 ps_rand(&rnd);
                 *address = rnd.X;
 #ifdef DEBUG
-                printf("%p    0x%08X\n", address, *address);
+                printf("%p    0x%08X\r\n", address, *address);
 #endif
                 address++;
                 i++;
             }while(i < size);
             end_t = clock();
             elapsed_t = (((double)(end_t - start_t) / CLOCKS_PER_SEC) * 1000.0);
-            printf("Total elapsed time = %fms\n", elapsed_t);
+            printf("Total elapsed time = %fms\r\n", elapsed_t);
         }
         else
         {
-            printf("Error: All or part of the requested memory area is outside of the allocated block!\n");
+            printf("Error: All or part of the requested memory area is outside of the allocated block!\r\n");
         }
     }
     else
     {
-        printf("Error: No allocated blocks of memory to write!\n");
+        printf("Error: No allocated blocks of memory to write!\r\n");
     }
 
     return;

@@ -37,7 +37,7 @@ uint32_t errors = 0;
 
     if((cmd == 0) || (b == 0))
     {
-        printf("Internal Error: Missing buffer data or block pointer!\n");
+        printf("Internal Error: Missing buffer data or block pointer!\r\n");
         return;
     }
     //First, we need to make sure we have an allocated block of memory 
@@ -61,9 +61,9 @@ uint32_t errors = 0;
             seed = strtol(endptr, 0, 16);
         }
 #ifdef DEBUG
-        printf("address is: %p\n", address);
-        printf("size is: 0x%08X\n", size);
-        printf("seed is: 0x%08X\n", seed);
+        printf("address is: %p\r\n", address);
+        printf("size is: 0x%08X\r\n", size);
+        printf("seed is: 0x%08X\r\n", seed);
 #endif
         //make sure the memory we want to write is within the 
         //bounds of our allocated block
@@ -74,7 +74,7 @@ uint32_t errors = 0;
             rnd.c = RAND_C;
             rnd.a = RAND_A;
             rnd.X = seed;
-            printf("Verifying %d pseudo random words of memory starting at adress %p.\n", size, address);
+            printf("Verifying %d pseudo random words of memory starting at adress %p.\r\n", size, address);
 
             start_t = clock();
             do
@@ -83,9 +83,9 @@ uint32_t errors = 0;
                 if(*address != rnd.X)
                 {
                     errors++;
-                    printf("Pattern mismatch at address: %p\n", address);
-                    printf("Expected data: 0x%08X\n", rnd.X);
-                    printf("Actual data: 0x%08X\n\n", *address);
+                    printf("Pattern mismatch at address: %p\r\n", address);
+                    printf("Expected data: 0x%08X\r\n", rnd.X);
+                    printf("Actual data: 0x%08X\r\n\n", *address);
                 }
                 address++;
                 i++;
@@ -94,22 +94,22 @@ uint32_t errors = 0;
             elapsed_t = (((double)(end_t - start_t) / CLOCKS_PER_SEC) * 1000.0);
             if(errors == 0)
             {
-                printf("All words verified!\n");
+                printf("All words verified!\r\n");
             }
             else
             {
-                printf("%d total errors detected!\n", errors);
+                printf("%d total errors detected!\r\n", errors);
             }
-            printf("Total elapsed time = %fms\n", elapsed_t);
+            printf("Total elapsed time = %fms\r\n", elapsed_t);
         }
         else
         {
-            printf("Error: All or part of the requested memory area is outside of the allocated block!\n");
+            printf("Error: All or part of the requested memory area is outside of the allocated block!\r\n");
         }
     }
     else
     {
-        printf("Error: No allocated blocks of memory to verify!\n");
+        printf("Error: No allocated blocks of memory to verify!\r\n");
     }
 
     return;

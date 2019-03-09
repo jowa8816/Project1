@@ -32,7 +32,7 @@ char *endptr = 0;
 
     if((cmd == 0) || (b == 0))
     {
-        printf("Internal Error: Missing buffer data or block pointer!\n");
+        printf("Internal Error: Missing buffer data or block pointer!\r\n");
         return;
     }
 
@@ -55,30 +55,30 @@ char *endptr = 0;
             size = strtol(endptr, 0, 10);
         }
 #ifdef DEBUG
-        printf("address is: %p\n", address);
-        printf("size is: %d\n", size);
+        printf("address is: %p\r\n", address);
+        printf("size is: %d\r\n", size);
 #endif
         //make sure the memory we want to dispaly is within the 
         //bounds of our allocated block
         if((size >= 0) && (address >= (int32_t *)b->ptr) && ((address + size) <= ((int32_t *)b->ptr + (int32_t)b->size)))
         {
-            printf("   Address           Data\n");
-            printf("--------------    ----------\n");
+            printf("   Address           Data\r\n");
+            printf("--------------    ----------\r\n");
             do
             {
-                printf("%p    0x%08X\n", address, *address);
+                printf("%p    0x%08X\r\n", address, *address);
                 address++;
                 i++;
             }while(i < size);
         }
         else
         {
-            printf("Error: All or part of the requested memory area is outside of the allocated block!\n");
+            printf("Error: All or part of the requested memory area is outside of the allocated block!\r\n");
         }
     }
     else
     {
-        printf("Error: No allocated blocks of memory to display!\n");
+        printf("Error: No allocated blocks of memory to display!\r\n");
     }
 
     return;

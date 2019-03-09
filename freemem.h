@@ -27,7 +27,7 @@
 #include "types.h"
 
 //define the help string
-#define HELP_FREE ("freemem - Free an allocated block of memory.\n")
+#define HELP_FREE ("freemem - Free an allocated block of memory.\r\n")
 
 /**
 * @brief Free a block of memory

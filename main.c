@@ -21,7 +21,7 @@
 *
 */
 
-#define WELCOME ("Welcome to the memory test suite!\nType 'help' to get a list of commands.\n")
+#define WELCOME ("Welcome to the memory test suite!\nType 'help' to get a list of commands.\r\n")
 #define PROMPT	(">>")
 
 #define BUF_SIZE	(50)  //maximum size of buffer to recieve from stdin
@@ -148,7 +148,7 @@ struct blockStruct block = {0, 0};
         }
         else
         {
-            printf("%s is not a recongized command.\n", buffer);
+            printf("%s is not a recongized command.\r\n", buffer);
         }
     }
     return 0 ;
