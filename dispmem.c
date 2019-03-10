@@ -32,7 +32,7 @@ char *endptr = 0;
 
     if((cmd == 0) || (b == 0))
     {
-        printf("Internal Error: Missing buffer data or block pointer!\r\n");
+        MYPRINTF("Internal Error: Missing buffer data or block pointer!\r\n");
         return;
     }
 
@@ -44,41 +44,55 @@ char *endptr = 0;
         {
             //Extract the address and size from the command buffer
             //command name is 7 chars long so we should start after that
+#if defined(LINUX)
             address = (int32_t *)strtoll(&cmd[7], &endptr, 16);
+#elif defined(KL25)
+            address = (int32_t *)strtol(&cmd[7], &endptr, 16);
+#endif
+
             size = strtol(endptr, 0, 10);
         }
         else if((cmd[8] == '-') && (cmd[9] == 'o'))
         {
             //Extract the offset and size from the command buffer
             //command name plus '-o' is 10 chars long so we should start after that
+#if defined(LINUX)
             address = b->ptr + (int32_t )strtoll(&cmd[10], &endptr, 16);
+#elif defined(KL25)
+            address = b->ptr + (int32_t )strtol(&cmd[10], &endptr, 16);
+#endif
             size = strtol(endptr, 0, 10);
         }
-#ifdef DEBUG
-        printf("address is: %p\r\n", address);
-        printf("size is: %d\r\n", size);
+#ifdef MY_DEBUG
+        MYPRINTF("address is: %p\r\n", address);
+        MYPRINTF("size is: %d\r\n", size);
 #endif
         //make sure the memory we want to dispaly is within the 
         //bounds of our allocated block
         if((size >= 0) && (address >= (int32_t *)b->ptr) && ((address + size) <= ((int32_t *)b->ptr + (int32_t)b->size)))
         {
-            printf("   Address           Data\r\n");
-            printf("--------------    ----------\r\n");
+#if defined(LINUX)
+            MYPRINTF("   Address           Data\r\n");
+            MYPRINTF("--------------    ----------\r\n");
+#elif defined(KL25)
+            MYPRINTF(" Address         Data\r\n");
+            MYPRINTF("----------    ----------\r\n");
+#endif
             do
             {
-                printf("%p    0x%08X\r\n", address, *address);
+                MYPRINTF("%p    0x%08X\r\n", address, *address);
                 address++;
                 i++;
             }while(i < size);
         }
         else
         {
-            printf("Error: All or part of the requested memory area is outside of the allocated block!\r\n");
+            MYPRINTF("Error: All or part of the requested memory area is outside of the allocated block!\r\n");
         }
     }
     else
     {
-        printf("Error: No allocated blocks of memory to display!\r\n");
+        MYPRINTF("Error: No allocated blocks of memory to display!\r\n");
     }
 
     return;

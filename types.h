@@ -23,8 +23,35 @@
 #include <stdlib.h>
 #include <stdint.h>
 
+//choose the platform
+//#define LINUX
+#define KL25
+
+//choose printf based on platform
+#if defined(LINUX)
+#define MYPRINTF printf
+#elif defined(KL25)
+#include "fsl_debug_console.h"
+#define MYPRINTF PRINTF
+#else
+#error "Need to select a platform!"
+#endif
+
+
+//define time measurement constants for and function for KL25
+//these come from time.h for Linux
+#if defined(LINUX)
+#include <time.h>
+#define MYCLOCK()	clock()
+#elif defined(KL25)
+#include "fsl_device_registers.h"
+//this is negative because we are using the PIT as a timer and it counts down.
+#define CLOCKS_PER_SEC	-48000000.0
+#define MYCLOCK() PIT->CHANNEL[0].CVAL
+#endif
+
 //uncomment this define to enable some debug messages
-//#define DEBUG
+//#define MY_DEBUG
 
 //define a structure for a block of allocated memory
 struct blockStruct

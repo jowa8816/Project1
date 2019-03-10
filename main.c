@@ -21,7 +21,7 @@
 *
 */
 
-#define WELCOME ("Welcome to the memory test suite!\nType 'help' to get a list of commands.\r\n")
+#define WELCOME ("Welcome to the memory test suite!\r\nType 'help' to get a list of commands.\r\n")
 #define PROMPT	(">>")
 
 #define BUF_SIZE	(50)  //maximum size of buffer to recieve from stdin
@@ -42,6 +42,17 @@ char command[CMD_SIZE];
 #include "writepat.h"
 #include "verifypat.h"
 #include "exit.h"
+
+#ifdef KL25
+#include "fsl_device_registers.h"
+#include "fsl_debug_console.h"
+#include "board.h"
+
+#include "pin_mux.h"
+
+SIM_Type *sim = SIM;
+PIT_Type *pit = PIT;
+#endif
 
 const struct commandStruct commands[] = {
     {"help", &help, HELP_HELP},
@@ -107,20 +118,87 @@ int16_t i = 0;
     return(i);
 }
 
+#ifdef KL25
+/*
+* Get characters from the keyboard and put into buffer up until the user hits enter
+* This is only used on the KL25 target since fgets doesn't seem to work.
+*/
+void myfgets(char *buf, int32_t n)
+{
+    char ch;
+    int32_t i = 0;
+
+    //clear out any previous buffer data
+    for(i = 0; i < n; i++)
+        {
+        buf[i] = '\0';
+        }
+
+    i = 0;
+
+    while((i < n) && (ch != '\r'))
+    {
+        ch = GETCHAR();
+        //don't echo back a backspace character if we are at the beginning of the buffer, this will wipe out our command prompt
+        if(!((i == 0) && (ch == '\177')))
+        {
+            PUTCHAR(ch);
+        }
+        //handle backspace
+        //if backspace was pressed then reset the previous char to null
+        //otherwise copy the new char to the buffer and increment to the next slot
+        if(ch == '\177')
+        {
+        	if(i > 0)
+        	{
+        	    i--;
+        	    buf[i] = '\0';
+        	}
+        }
+        else
+        {
+            buf[i] = ch;
+            i++;
+        }
+    }
+    //replace \r in the buffer with \n so it looks more like the linux code
+    buf[i-1] = '\n';
+    //print the \n so that we actually advance the cursor to the next line
+    MYPRINTF("\n");
+}
+#endif
+
 int main(void)
 {
 int16_t cmdidx;
 struct blockStruct block = {0, 0};
    
-    //print the welcome message then enter a forever loop.
+#ifdef KL25
+/* Init board hardware. */
+	BOARD_InitPins();
+	BOARD_BootClockRUN();
+	BOARD_InitDebugConsole();
+
+    sim->SCGC6 |= SIM_SCGC6_PIT(1);				//enable clock to PIT peripheral
+
+	pit->MCR = PIT_MCR_MDIS(0);						//enable clock to PIT
+	pit->CHANNEL[0].LDVAL = 0xFFFFFFFF;				//start PIT timer at -1
+	pit->CHANNEL[0].TCTRL = PIT_TCTRL_TEN(1);		//enable PIT timer
+#endif
+
+	//print the welcome message then enter a forever loop.
     //we'll only leave the loop if the user exits the application.  
-    printf(WELCOME);
+    MYPRINTF(WELCOME);
 
     while(1)
     {
         //print the command prompt and wait for user input
-        printf(PROMPT);
+        MYPRINTF(PROMPT);
+#if defined(LINUX)
         fgets(buffer,BUF_SIZE,stdin);
+#elif defined(KL25)
+        myfgets(buffer,BUF_SIZE);
+#endif
 
         // get the command name that the user typed so we can compare it against valid
         //command names.  
@@ -148,7 +226,7 @@ struct blockStruct block = {0, 0};
         }
         else
         {
-            printf("%s is not a recongized command.\r\n", buffer);
+            MYPRINTF("%s is not a recongized command.\r\n", buffer);
         }
     }
     return 0 ;

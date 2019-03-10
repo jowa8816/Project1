@@ -44,15 +44,15 @@ int32_t size;
 
     if((cmd == 0) || (b == 0))
     {
-        printf("Internal Error: Missing buffer data or block pointer!\r\n");
+        MYPRINTF("Internal Error: Missing buffer data or block pointer!\r\n");
         return;
     }
 
     //Extract the size from the command buffer
     //command name is 9 chars long so we should start after that
     size = strtol(&cmd[9], 0, 10);
-#ifdef DEBUG
-    printf("size is: %d\r\n", size);
+#ifdef MY_DEBUG
+    MYPRINTF("size is: %d\r\n", size);
 #endif
 
     //size needs to be positive
@@ -67,19 +67,32 @@ int32_t size;
             if(b->ptr)
             {
                 b->size = size;
-                printf("Allocated %d 4-byte words starting at address %p\r\n", size, b->ptr);
+                MYPRINTF("Allocated %d 4-byte words starting at address %p\r\n", size, b->ptr);
+            }
+            else
+            {
+            	b->size = 0;
+            	MYPRINTF(" Failed to allocate %d 4-byte words.  Try again!\r\n", size);
             }
         }
         else
         {
             b->ptr = realloc(b->ptr,size*sizeof(int32_t));
-            b->size = size;
-            printf("Reallocated block at address %p with %d 4-byte words\r\n", b->ptr, size);
+            if(b->ptr)
+            {
+                b->size = size;
+                MYPRINTF("Reallocated block at address %p with %d 4-byte words\r\n", b->ptr, size);
+            }
+            else
+            {
+            	b->size = 0;
+            	MYPRINTF(" Failed to allocate %d 4-byte words.  Try again!\r\n", size);
+            }
         }
     }
     else
     {
-          printf("Error: Failed to specify size or specified size is less than or equal to 0!\r\n");
+          MYPRINTF("Error: Failed to specify size or specified size is less than or equal to 0!\r\n");
     }
 
     return;

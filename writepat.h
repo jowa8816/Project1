@@ -24,9 +24,8 @@
 #ifndef __WRITEPAT_H__
 #define __WRITEPAT_H__
 
-#include <time.h>
-#include <stdio.h>
 #include "types.h"
+#include <stdio.h>
 #include <ctype.h>
 #include "ps_rand.h"
 

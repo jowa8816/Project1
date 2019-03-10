@@ -23,10 +23,9 @@
 #ifndef __INVERTMEM_H__
 #define __INVERTMEM_H__
 
-#include <time.h>
+#include "types.h"
 #include <stdio.h>
 #include <ctype.h>
-#include "types.h"
 
 //define the help string
 #define HELP_INV ("invertmem [-o] <address> [<words>] -Invert the contents of memory starting at <address> for one or [<words>] 4-byte words.  Optional '-o' argument treats <address> as an offset into the allocated block of memory.\r\n")

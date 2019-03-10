@@ -27,7 +27,7 @@ void freemem(char *cmd, struct blockStruct *b)
 {
     if((cmd == 0) || (b == 0))
     {
-        printf("Internal Error: Missing buffer data or block pointer!\r\n");
+        MYPRINTF("Internal Error: Missing buffer data or block pointer!\r\n");
         return;
     }
 
@@ -36,14 +36,14 @@ void freemem(char *cmd, struct blockStruct *b)
     //of the block info
     if((b->ptr != 0) && (b->size != 0))
     {
-        printf("Freeing %d words of allocated memory!\r\n",b->size);
+        MYPRINTF("Freeing %d words of allocated memory!\r\n",b->size);
         free(b->ptr);
         b->size = 0;
         b->ptr = 0;
     }
     else
     {
-        printf("Error: No allocated blocks of memory to free!\r\n");
+        MYPRINTF("Error: No allocated blocks of memory to free!\r\n");
     }
 
     return;

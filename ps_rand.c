@@ -27,7 +27,7 @@ void ps_rand(struct randStruct *r)
 {
     if(r == 0)
     {
-        printf("Internal Error: Missing data or pointer!\r\n");
+        MYPRINTF("Internal Error: Missing data or pointer!\r\n");
         return;
     }
 
