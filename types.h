@@ -24,8 +24,8 @@
 #include <stdint.h>
 
 //choose the platform
-//#define LINUX
-#define KL25
+#define LINUX
+//#define KL25
 
 //choose printf based on platform
 #if defined(LINUX)
