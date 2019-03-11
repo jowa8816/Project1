@@ -72,10 +72,12 @@ double elapsed_t;
         MYPRINTF("address is: %p\r\n", address);
         MYPRINTF("size is: %d\r\n", size);
 #endif
+#ifndef NO_RANGE
         //make sure the memory we want to invert is within the 
         //bounds of our allocated block
         if((size >= 0) && (address >= (int32_t *)b->ptr) && ((address + size) <= ((int32_t *)b->ptr + (int32_t)b->size)))
         {
+#endif
             MYPRINTF("Inverting %d words of memory starting at adress %p.\r\n", size,address);
             start_t = MYCLOCK();
             do
@@ -85,15 +87,15 @@ double elapsed_t;
                 i++;
             }while(i < size);
             end_t = MYCLOCK();
-//            elapsed_t = (((double)(end_t - start_t) / CLOCKS_PER_SEC) * 1000.0);
-//            MYPRINTF("Total elapsed time = %fms\r\n", elapsed_t);
             elapsed_t = (((double)(end_t - start_t) / CLOCKS_PER_SEC) * 1000000.0);
             MYPRINTF("Total elapsed time = %d micro-seconds\r\n", (int32_t)elapsed_t);
+#ifndef NO_RANGE
         }
         else
         {
             MYPRINTF("Error: All or part of the requested memory area is outside of the allocated block!\r\n");
         }
+#endif
     }
     else
     {

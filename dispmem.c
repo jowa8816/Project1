@@ -67,10 +67,12 @@ char *endptr = 0;
         MYPRINTF("address is: %p\r\n", address);
         MYPRINTF("size is: %d\r\n", size);
 #endif
+#ifndef NO_RANGE
         //make sure the memory we want to dispaly is within the 
         //bounds of our allocated block
         if((size >= 0) && (address >= (int32_t *)b->ptr) && ((address + size) <= ((int32_t *)b->ptr + (int32_t)b->size)))
         {
+#endif
 #if defined(LINUX)
             MYPRINTF("   Address           Data\r\n");
             MYPRINTF("--------------    ----------\r\n");
@@ -84,11 +86,13 @@ char *endptr = 0;
                 address++;
                 i++;
             }while(i < size);
+#ifndef NO_RANGE
         }
         else
         {
             MYPRINTF("Error: All or part of the requested memory area is outside of the allocated block!\r\n");
         }
+#endif
     }
     else
     {

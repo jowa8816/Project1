@@ -27,7 +27,7 @@
 #include "types.h"
 
 //define the help string
-#define HELP_EXIT ("exit - Exit this application\r\n")
+#define HELP_EXIT ("exit - Exit this application.\r\n")
 
 /**
 * @brief Displays a list of commands

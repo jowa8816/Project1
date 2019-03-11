@@ -65,17 +65,21 @@ char *endptr = 0;
         MYPRINTF("address is: %p\r\n", address);
         MYPRINTF("data is: 0x%08X\r\n", data);
 #endif
+#ifndef NO_RANGE
         //make sure the memory we want to write is within the 
         //bounds of our allocated block
-        if((address >= (int32_t *)b->ptr) && (address <= ((int32_t *)b->ptr + ((int32_t)b->size * sizeof(int32_t)))))
+        if((address >= (int32_t *)b->ptr) && (address <= ((int32_t *)b->ptr + (int32_t)b->size)))
         {
+#endif
             *address = data;
             MYPRINTF("%X written to address %p\r\n", data, address);
+#ifndef NO_RANGE
         }
         else
         {
             MYPRINTF("Error: The requested address is outside of the allocated block!\r\n");
         }
+#endif
     }
     else
     {

@@ -76,10 +76,12 @@ double elapsed_t;
         MYPRINTF("size is: 0x%08X\r\n", size);
         MYPRINTF("seed is: 0x%08X\r\n", seed);
 #endif
+#ifndef NO_RANGE
         //make sure the memory we want to write is within the 
         //bounds of our allocated block
         if((size >= 0) && (address >= (int32_t *)b->ptr) && ((address + size) <= ((int32_t *)b->ptr + (int32_t)b->size)))
         {
+#endif
             //setup the random number generator
             rnd.m = RAND_M;
             rnd.c = RAND_C;
@@ -107,15 +109,15 @@ double elapsed_t;
                 i++;
             }while(i < size);
             end_t = MYCLOCK();
-//            elapsed_t = (((double)(end_t - start_t) / CLOCKS_PER_SEC) * 1000.0);
-//            MYPRINTF("Total elapsed time = %fms\r\n", elapsed_t);
             elapsed_t = (((double)(end_t - start_t) / CLOCKS_PER_SEC) * 1000000.0);
             MYPRINTF("Total elapsed time = %d micro-seconds\r\n", (int32_t)elapsed_t);
+#ifndef NO_RANGE
         }
         else
         {
             MYPRINTF("Error: All or part of the requested memory area is outside of the allocated block!\r\n");
         }
+#endif
     }
     else
     {

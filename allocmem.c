@@ -23,21 +23,6 @@
 
 #include "allocmem.h"
 
-/*int32_t strtodec(char *s)
-{
-    //copy up to the first space line feed or null from the buffer
-    //this get us just the command portion
-    i = 0;
-    while((*buf != ' ') && (*buf != '\n') && (*buf != '\0'))
-    {
-        *cmd = *buf;
-        cmd++;
-        buf++;
-        i++;
-    }
-
-}*/
-
 void allocmem(char *cmd, struct blockStruct *b)
 {
 int32_t size;

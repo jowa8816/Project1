@@ -53,6 +53,9 @@
 //uncomment this define to enable some debug messages
 //#define MY_DEBUG
 
+//uncomment this to turn off range error checks
+//#define NO_RANGE
+
 //define a structure for a block of allocated memory
 struct blockStruct
 {
